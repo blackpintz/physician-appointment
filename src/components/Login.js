@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
+import propTypes from 'prop-types';
 
 class Login extends React.Component {
   constructor(props) {
@@ -19,6 +20,8 @@ class Login extends React.Component {
 
   handleLogin = e => {
     const { email, password } = this.state;
+    const { routeProps } = this.props;
+    const { history } = routeProps;
     e.preventDefault();
     const url = 'https://frozen-harbor-46293.herokuapp.com/auth/sign_in';
     axios({
@@ -40,7 +43,7 @@ class Login extends React.Component {
           client: response.headers.client,
           uid: response.data.data.uid,
         }));
-      window.location = '/';
+      history.push('/');
     }).catch(error => {
       console.log(`There is an ${error}.`);
     });
@@ -72,5 +75,15 @@ class Login extends React.Component {
     );
   }
 }
+
+Login.propTypes = {
+  routeProps: propTypes.objectOf(propTypes.object),
+  history: propTypes.objectOf(propTypes.func.isRequired),
+};
+
+Login.defaultProps = {
+  routeProps: { history: 'no value' },
+  history: {},
+};
 
 export default Login;
