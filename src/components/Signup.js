@@ -1,15 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 import propTypes from 'prop-types';
 
-class Login extends React.Component {
+class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
       password: '',
+      name: '',
+      username: '',
     };
   }
 
@@ -19,12 +20,14 @@ class Login extends React.Component {
     });
   }
 
-  handleLogin = e => {
-    const { email, password } = this.state;
+  handleSignup = e => {
+    const {
+      email, password, name, username,
+    } = this.state;
     const { routeProps } = this.props;
     const { history } = routeProps;
     e.preventDefault();
-    const url = 'https://frozen-harbor-46293.herokuapp.com/auth/sign_in';
+    const url = 'https://frozen-harbor-46293.herokuapp.com/auth';
     axios({
       url,
       method: 'POST',
@@ -35,6 +38,8 @@ class Login extends React.Component {
       data: {
         email,
         password,
+        name,
+        username,
       },
     }).then(response => {
       localStorage.setItem('user',
@@ -53,11 +58,21 @@ class Login extends React.Component {
   }
 
   render() {
-    const { email, password } = this.state;
+    const {
+      email, password, name, username,
+    } = this.state;
     return (
       <>
-        <h3>Log in.</h3>
-        <Form onSubmit={this.handleLogin}>
+        <h3>Sign up.</h3>
+        <Form onSubmit={this.handleSignup}>
+          <Form.Group>
+            <Form.Label>Name</Form.Label>
+            <Form.Control type="text" placeholder="Enter your name" name="name" value={name} onChange={this.handleChange} />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Username</Form.Label>
+            <Form.Control type="text" placeholder="Enter your username" name="username" value={username} onChange={this.handleChange} />
+          </Form.Group>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control type="email" placeholder="Enter email" name="email" value={email} onChange={this.handleChange} />
@@ -65,7 +80,6 @@ class Login extends React.Component {
               We will never share your email with anyone else.
             </Form.Text>
           </Form.Group>
-
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password" name="password" value={password} onChange={this.handleChange} />
@@ -74,21 +88,19 @@ class Login extends React.Component {
             Submit
           </Button>
         </Form>
-        <p>You do not have an account?</p>
-        <Link to="/signup">Sign-up</Link>
       </>
     );
   }
 }
 
-Login.propTypes = {
+Signup.propTypes = {
   routeProps: propTypes.objectOf(propTypes.object),
   history: propTypes.objectOf(propTypes.func.isRequired),
 };
 
-Login.defaultProps = {
+Signup.defaultProps = {
   routeProps: { history: 'no value' },
   history: {},
 };
 
-export default Login;
+export default Signup;
