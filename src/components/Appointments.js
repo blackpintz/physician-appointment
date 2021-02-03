@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
@@ -9,6 +9,16 @@ const Appointments = () => {
     const user = localStorage.getItem('user');
     return (user);
   };
+
+  useEffect(async () => {
+    if (localStorage.user) {
+      const result = await axios.get('https://frozen-harbor-46293.herokuapp.com/appointments', { headers: JSON.parse(localStorage.user) });
+      const { data } = result;
+      console.log(data);
+    } else {
+      console.log('Not logged in yet..');
+    }
+  }, []);
 
   const handleSignOut = e => {
     e.preventDefault();
