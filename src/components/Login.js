@@ -41,6 +41,9 @@ class Login extends React.Component {
           'access-token': response.headers['access-token'],
           client: response.headers.client,
           uid: response.data.data.uid,
+          id: response.data.data.id,
+          name: response.data.data.name,
+          username: response.data.data.username,
         }));
       history.push('/');
     }).catch(error => {
