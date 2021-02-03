@@ -1,22 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import currentUser from '../helpers/currentUser';
+import AppointmentItem from './AppointmentItem';
 
-const Appointments = () => {
+const AppointmentList = () => {
+  const [data, setData] = useState([]);
   const history = useHistory();
-  const currentUser = () => {
-    const user = localStorage.getItem('user');
-    return (user);
-  };
-
   useEffect(async () => {
     if (localStorage.user) {
       const result = await axios.get('https://frozen-harbor-46293.herokuapp.com/appointments', { headers: JSON.parse(localStorage.user) });
       const { data } = result;
-      console.log(data);
+      setData(data);
     } else {
-      console.log('Not logged in yet..');
+      <p>Not logged in yet..</p>;
     }
   }, []);
 
@@ -35,6 +33,15 @@ const Appointments = () => {
   return (
     <>
       <h2>Appointments go here!</h2>
+      {data.length === 0 ? (
+        <>
+          <h3>You do not have any appointments.</h3>
+        </>
+      ) : (
+        <>
+          {data.map(item => <AppointmentItem key={item.id} item={item} />)}
+        </>
+      )}
       {currentUser() ? (
         <Button className="mt-4" variant="danger" onClick={handleSignOut}>Logout</Button>
       ) : (<></>)}
@@ -42,4 +49,4 @@ const Appointments = () => {
   );
 };
 
-export default Appointments;
+export default AppointmentList;

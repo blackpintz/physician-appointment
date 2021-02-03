@@ -36,7 +36,6 @@ class Login extends React.Component {
         password,
       },
     }).then(response => {
-      console.log(response);
       localStorage.setItem('user',
         JSON.stringify({
           'access-token': response.headers['access-token'],
@@ -45,7 +44,7 @@ class Login extends React.Component {
         }));
       history.push('/');
     }).catch(error => {
-      console.log(`There is an ${error}.`);
+      <p>{error}</p>;
     });
   }
 
