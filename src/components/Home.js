@@ -6,13 +6,15 @@ import { Button } from 'react-bootstrap';
 const Home = () => {
   const [data, setData] = useState([]);
   useEffect(async () => {
+    let isMounted = true;
     if (localStorage.user) {
       const result = await axios.get('https://frozen-harbor-46293.herokuapp.com/physicians', { headers: JSON.parse(localStorage.user) });
       const { data } = result;
-      setData(data);
+      if (isMounted) setData(data);
     } else {
       <p>Not logged in yet..</p>;
     }
+    return () => { isMounted = false; };
   }, []);
   return (
     <>

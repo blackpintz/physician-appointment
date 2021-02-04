@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import propTypes from 'prop-types';
 
@@ -88,6 +89,8 @@ class Signup extends React.Component {
             Submit
           </Button>
         </Form>
+        <p>Already have an account?</p>
+        <Link to="/login">Login</Link>
       </>
     );
   }

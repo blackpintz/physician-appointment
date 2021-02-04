@@ -2,9 +2,12 @@ import React from 'react';
 import propTypes from 'prop-types';
 import axios from 'axios';
 import moment from 'moment';
-import { Form, Button } from 'react-bootstrap';
+import {
+  Form, Button, Container, Row, Col, Image,
+} from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import doctorImg from '../images/doctor.jpg';
 
 class Physician extends React.Component {
   constructor(props) {
@@ -52,31 +55,40 @@ class Physician extends React.Component {
 
   render() {
     const {
-      userId, physicianId, date, city,
+      date, city,
     } = this.state;
     return (
-      <>
-        <h3>Physician form goes here!</h3>
-        <p>{userId}</p>
-        <p>{physicianId}</p>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Group>
-            <Form.Label>City</Form.Label>
-            <Form.Control type="text" placeholder="Enter City" value={city} name="city" onChange={this.handleChange} />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Date</Form.Label>
-            <DatePicker
-              selected={date}
-              onChange={date => this.setState({ date })}
-              minDate={moment().toDate()}
-            />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
-      </>
+      <Container>
+        <Row className="physician">
+          <Col className="col-8 my-3">
+            <Image src={doctorImg} alt="doctor" fluid className="doctor" />
+          </Col>
+          <Col>
+            <Form className="d-flex flex-column justify-content-center form" onSubmit={this.handleSubmit}>
+              <Form.Text className="h4 mb-3 ml-4">Book an Appointment.</Form.Text>
+              <Form.Group as={Row}>
+                <Form.Label column className="h4 col-1 mr-2">City</Form.Label>
+                <Col className="col-9">
+                  <Form.Control type="text" placeholder="Enter City" value={city} name="city" onChange={this.handleChange} />
+                </Col>
+              </Form.Group>
+              <Form.Group as={Row}>
+                <Form.Label column className="h4 col-1 mr-3">Date</Form.Label>
+                <Col className="col-9">
+                  <DatePicker
+                    selected={date}
+                    onChange={date => this.setState({ date })}
+                    minDate={moment().toDate()}
+                  />
+                </Col>
+              </Form.Group>
+              <Button variant="primary" type="submit" className="ml-5 w-75">
+                Submit
+              </Button>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
