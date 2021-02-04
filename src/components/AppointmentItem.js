@@ -1,17 +1,20 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import { Card } from 'react-bootstrap';
 
 const AppointmentItem = ({ item }) => {
-  const { city, user, physician } = item;
-  const { email } = user;
+  const {
+    city, physician, date, id,
+  } = item;
   const { category } = physician;
   return (
-    <>
-      <p>Each Appointment goes here.</p>
-      <p>{`Email: ${email}`}</p>
-      <p>{`Category: ${category}`}</p>
-      <p>{city}</p>
-    </>
+    <Card key={id} className="w-50 mb-3">
+      <Card.Header as="h5" />
+      <Card.Body>
+        <Card.Title className="text-secondary">{`${category} appointment on ${date}, at ${city}`}</Card.Title>
+      </Card.Body>
+    </Card>
+
   );
 };
 
