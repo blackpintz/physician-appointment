@@ -1,6 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import axios from 'axios';
+import moment from 'moment';
 import { Form, Button } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -68,6 +69,7 @@ class Physician extends React.Component {
             <DatePicker
               selected={date}
               onChange={date => this.setState({ date })}
+              minDate={moment().toDate()}
             />
           </Form.Group>
           <Button variant="primary" type="submit">

@@ -46,6 +46,10 @@ class Login extends React.Component {
           name: response.data.data.name,
           username: response.data.data.username,
         }));
+      this.setState({
+        email: '',
+        password: '',
+      });
       history.push('/');
     }).catch(error => {
       <p>{error}</p>;
