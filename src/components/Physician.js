@@ -1,5 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import moment from 'moment';
 import {
@@ -12,9 +13,9 @@ import doctorImg from '../images/doctor.jpg';
 class Physician extends React.Component {
   constructor(props) {
     super(props);
-    const { physicianId, userId } = this.props;
+    const { physicianId, user } = this.props;
     this.state = {
-      userId,
+      userId: user,
       physicianId,
       date: new Date(),
       city: '',
@@ -100,18 +101,22 @@ class Physician extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  user: state.user,
+});
+
 Physician.propTypes = {
   physicianId: propTypes.string,
-  userId: propTypes.string,
+  user: propTypes.number,
   routeProps: propTypes.objectOf(propTypes.object),
   history: propTypes.objectOf(propTypes.func.isRequired),
 };
 
 Physician.defaultProps = {
   physicianId: '',
-  userId: '',
+  user: '',
   routeProps: { history: 'no value' },
   history: {},
 };
 
-export default Physician;
+export default connect(mapStateToProps)(Physician);

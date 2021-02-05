@@ -1,17 +1,25 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import Login from '../components/Login';
+import { Login } from '../components/Login';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-test('should submit login form', () => {
-  const rProps = {
+let rProps;
+let onFetch;
+let wrapper;
+
+beforeEach(() => {
+  rProps = {
     history: {
       push: jest.fn(),
     },
   };
-  const wrapper = shallow(<Login routeProps={rProps} />);
+  onFetch = jest.fn();
+  wrapper = shallow(<Login onFetch={onFetch} routeProps={rProps} />);
+});
+
+test('should submit login form', () => {
   wrapper.find('Form').simulate('submit', {
     preventDefault: () => { },
   });
@@ -21,12 +29,6 @@ test('should submit login form', () => {
 
 test('should set email on input change', () => {
   const value = 'user@example.com';
-  const rProps = {
-    history: {
-      push: jest.fn(),
-    },
-  };
-  const wrapper = shallow(<Login routeProps={rProps} />);
   wrapper.find('#email').simulate('change', {
     target: { value, name: 'email' },
   });
@@ -35,12 +37,6 @@ test('should set email on input change', () => {
 
 test('should set password on input change', () => {
   const value = 'password';
-  const rProps = {
-    history: {
-      push: jest.fn(),
-    },
-  };
-  const wrapper = shallow(<Login routeProps={rProps} />);
   wrapper.find('#password').simulate('change', {
     target: { value, name: 'password' },
   });
@@ -48,12 +44,6 @@ test('should set password on input change', () => {
 });
 
 test('should call onSubmit for valid form submission', () => {
-  const rProps = {
-    history: {
-      push: jest.fn(),
-    },
-  };
-  const wrapper = shallow(<Login routeProps={rProps} />);
   wrapper.instance().handleLogin = jest.fn();
   wrapper.find('#password').simulate('change', {
     target: { value: 'password', name: 'password' },

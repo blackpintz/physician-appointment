@@ -3,8 +3,10 @@ import {
   Form, Button, Alert, Container,
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import propTypes from 'prop-types';
+import addUserId from '../actions/user';
 
 class Signup extends React.Component {
   constructor(props) {
@@ -28,7 +30,7 @@ class Signup extends React.Component {
     const {
       email, password, name, username,
     } = this.state;
-    const { routeProps } = this.props;
+    const { routeProps, onFetch } = this.props;
     const { history } = routeProps;
     e.preventDefault();
     const url = 'https://frozen-harbor-46293.herokuapp.com/auth';
@@ -55,6 +57,7 @@ class Signup extends React.Component {
           name: response.data.data.name,
           username: response.data.data.username,
         }));
+      onFetch(response.data.data.id);
       history.push('/');
     }).catch(error => {
       <p>{error}</p>;
@@ -84,14 +87,14 @@ class Signup extends React.Component {
               <Form.Label>Username</Form.Label>
               <Form.Control type="text" placeholder="Enter your username" name="username" value={username} onChange={this.handleChange} />
             </Form.Group>
-            <Form.Group controlId="formBasicEmail">
+            <Form.Group>
               <Form.Label>Email address</Form.Label>
               <Form.Control id="email" type="email" placeholder="Enter email" name="email" value={email} onChange={this.handleChange} />
               <Form.Text className="text-muted">
                 We will never share your email with anyone else.
               </Form.Text>
             </Form.Group>
-            <Form.Group controlId="formBasicPassword">
+            <Form.Group>
               <Form.Label>Password</Form.Label>
               <Form.Control id="password" type="password" placeholder="Password" name="password" value={password} onChange={this.handleChange} />
             </Form.Group>
@@ -107,7 +110,12 @@ class Signup extends React.Component {
   }
 }
 
+const mapDispatchToProps = dispatch => ({
+  onFetch: data => dispatch(addUserId(data)),
+});
+
 Signup.propTypes = {
+  onFetch: propTypes.func.isRequired,
   routeProps: propTypes.objectOf(propTypes.object),
   history: propTypes.objectOf(propTypes.func.isRequired),
 };
@@ -117,4 +125,6 @@ Signup.defaultProps = {
   history: {},
 };
 
-export default Signup;
+const ConnectSignup = connect(null, mapDispatchToProps)(Signup);
+
+export { ConnectSignup as default, Signup };

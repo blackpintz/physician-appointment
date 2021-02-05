@@ -14,9 +14,7 @@ exports[`should submit login form 1`] = `
       inline={false}
       onSubmit={[Function]}
     >
-      <FormGroup
-        controlId="formBasicEmail"
-      >
+      <FormGroup>
         <FormLabel
           column={false}
           srOnly={false}
@@ -37,9 +35,7 @@ exports[`should submit login form 1`] = `
           We will never share your email with anyone else.
         </FormText>
       </FormGroup>
-      <FormGroup
-        controlId="formBasicPassword"
-      >
+      <FormGroup>
         <FormLabel
           column={false}
           srOnly={false}

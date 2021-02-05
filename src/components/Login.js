@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import {
   Form, Button, Alert, Container,
 } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import propTypes from 'prop-types';
+import addUserId from '../actions/user';
 
 class Login extends React.Component {
   constructor(props) {
@@ -24,7 +26,7 @@ class Login extends React.Component {
 
   handleLogin = e => {
     const { email, password } = this.state;
-    const { routeProps } = this.props;
+    const { routeProps, onFetch } = this.props;
     const { history } = routeProps;
     e.preventDefault();
     const url = 'https://frozen-harbor-46293.herokuapp.com/auth/sign_in';
@@ -49,6 +51,7 @@ class Login extends React.Component {
           name: response.data.data.name,
           username: response.data.data.username,
         }));
+      onFetch(response.data.data.id);
       this.setState({
         email: '',
         password: '',
@@ -75,14 +78,14 @@ class Login extends React.Component {
         <div className="w-25 mx-auto mt-3">
           <h3>Log in.</h3>
           <Form onSubmit={this.handleLogin}>
-            <Form.Group controlId="formBasicEmail">
+            <Form.Group>
               <Form.Label>Email address</Form.Label>
               <Form.Control id="email" type="email" placeholder="Enter email" name="email" value={email} onChange={this.handleChange} />
               <Form.Text className="text-muted">
                 We will never share your email with anyone else.
               </Form.Text>
             </Form.Group>
-            <Form.Group controlId="formBasicPassword">
+            <Form.Group>
               <Form.Label>Password</Form.Label>
               <Form.Control id="password" type="password" placeholder="Password" name="password" value={password} onChange={this.handleChange} />
             </Form.Group>
@@ -98,7 +101,12 @@ class Login extends React.Component {
   }
 }
 
+const mapDispatchToProps = dispatch => ({
+  onFetch: data => dispatch(addUserId(data)),
+});
+
 Login.propTypes = {
+  onFetch: propTypes.func.isRequired,
   routeProps: propTypes.objectOf(propTypes.object),
   history: propTypes.objectOf(propTypes.func.isRequired),
 };
@@ -108,4 +116,6 @@ Login.defaultProps = {
   history: {},
 };
 
-export default Login;
+const ConnectLogin = connect(null, mapDispatchToProps)(Login);
+
+export { ConnectLogin as default, Login };
