@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders App correctly 1`] = `
+<Fragment>
+  <withRouter(Menu) />
+  <Switch>
+    <Route
+      exact={true}
+      path="/login"
+      render={[Function]}
+    />
+    <Route
+      exact={true}
+      path="/"
+    >
+      <Redirect
+        to="/login"
+      />
+    </Route>
+    <Route
+      exact={true}
+      path="/signup"
+      render={[Function]}
+    />
+    <Route
+      exact={true}
+      path="/appointments"
+    >
+      <Redirect
+        to="/login"
+      />
+    </Route>
+    <Route
+      exact={true}
+      path="/physician/:id"
+      render={[Function]}
+    />
+  </Switch>
+</Fragment>
+`;
