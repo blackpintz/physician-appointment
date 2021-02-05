@@ -12,11 +12,10 @@ import doctorImg from '../images/doctor.jpg';
 class Physician extends React.Component {
   constructor(props) {
     super(props);
-    const { id } = this.props;
-    const user = JSON.parse(localStorage.user);
+    const { physicianId, userId } = this.props;
     this.state = {
-      userId: user.id,
-      physicianId: id,
+      userId,
+      physicianId,
       date: new Date(),
       city: '',
     };
@@ -69,7 +68,7 @@ class Physician extends React.Component {
               <Form.Group as={Row}>
                 <Form.Label column className="h4 col-1 mr-2">City</Form.Label>
                 <Col className="col-9">
-                  <Form.Control type="text" placeholder="Enter City" value={city} name="city" onChange={this.handleChange} />
+                  <Form.Control id="city" type="text" placeholder="Enter City" value={city} name="city" onChange={this.handleChange} />
                   <Form.Text className="text-muted">
                     A minimum of three letters.
                   </Form.Text>
@@ -102,13 +101,15 @@ class Physician extends React.Component {
 }
 
 Physician.propTypes = {
-  id: propTypes.string,
+  physicianId: propTypes.string,
+  userId: propTypes.string,
   routeProps: propTypes.objectOf(propTypes.object),
   history: propTypes.objectOf(propTypes.func.isRequired),
 };
 
 Physician.defaultProps = {
-  id: '',
+  physicianId: '',
+  userId: '',
   routeProps: { history: 'no value' },
   history: {},
 };

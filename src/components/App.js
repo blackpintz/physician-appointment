@@ -22,7 +22,7 @@ const App = () => (
       <Route exact path="/appointments">
         {currentUser() ? <AppointmentList /> : <Redirect to="/login" />}
       </Route>
-      <Route exact path="/physician/:id" render={routeProps => (!currentUser() ? <Redirect to="/" /> : <Physician id={routeProps.match.params.id} routeProps={routeProps} />)} />
+      <Route exact path="/physician/:id" render={routeProps => (!currentUser() ? <Redirect to="/" /> : <Physician physicianId={routeProps.match.params.id} userId={JSON.parse(localStorage.user).id} routeProps={routeProps} />)} />
     </Switch>
   </>
 );

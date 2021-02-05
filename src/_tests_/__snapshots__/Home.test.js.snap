@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render AppointmentList component 1`] = `
+<Container
+  fluid={false}
+>
+  <h3
+    className="mt-2"
+  >
+    Available Physicians
+  </h3>
+</Container>
+`;
