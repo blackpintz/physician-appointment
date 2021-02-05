@@ -70,6 +70,9 @@ class Physician extends React.Component {
                 <Form.Label column className="h4 col-1 mr-2">City</Form.Label>
                 <Col className="col-9">
                   <Form.Control type="text" placeholder="Enter City" value={city} name="city" onChange={this.handleChange} />
+                  <Form.Text className="text-muted">
+                    A minimum of three letters.
+                  </Form.Text>
                 </Col>
               </Form.Group>
               <Form.Group as={Row}>

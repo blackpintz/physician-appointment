@@ -25,7 +25,7 @@ const Menu = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            <Link to="/"><p className="text-white text-decoration-none h5 mr-2 mt-2">Home</p></Link>
+            <Link to="/"><p className="text-white text-decoration-none h5 mr-4 mt-2">Home</p></Link>
             <Link to="/appointments"><p className="text-white text-decoration-none h5 mt-2">Appointments</p></Link>
           </Nav>
           <Nav>

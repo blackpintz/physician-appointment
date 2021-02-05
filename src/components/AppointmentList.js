@@ -20,7 +20,7 @@ const AppointmentList = () => {
       <h3>Your Appointments</h3>
       {data.length === 0 ? (
         <>
-          <h3>You do not have any appointments.</h3>
+          <h5>You do not have any appointments.</h5>
         </>
       ) : (
         <>
