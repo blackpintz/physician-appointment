@@ -19,7 +19,6 @@ class Physician extends React.Component {
       physicianId: id,
       date: new Date(),
       city: '',
-      validated: false,
     };
   }
 
@@ -52,12 +51,11 @@ class Physician extends React.Component {
     }).then(() => {
       history.push('/appointments');
     });
-    this.setState({ validated: true });
   }
 
   render() {
     const {
-      date, city, validated,
+      date, city,
     } = this.state;
     return (
       <Container>
@@ -66,15 +64,12 @@ class Physician extends React.Component {
             <Image src={doctorImg} alt="doctor" fluid className="doctor" />
           </Col>
           <Col>
-            <Form noValidate validated={validated} className="d-flex flex-column justify-content-center form" onSubmit={this.handleSubmit}>
+            <Form className="d-flex flex-column justify-content-center form" onSubmit={this.handleSubmit}>
               <Form.Text className="h4 mb-3 ml-4">Book an Appointment.</Form.Text>
               <Form.Group as={Row}>
                 <Form.Label column className="h4 col-1 mr-2">City</Form.Label>
                 <Col className="col-9">
-                  <Form.Control required type="text" placeholder="Enter City" value={city} name="city" onChange={this.handleChange} />
-                  <Form.Control.Feedback type="invalid">
-                    Please enter a valid city.
-                  </Form.Control.Feedback>
+                  <Form.Control type="text" placeholder="Enter City" value={city} name="city" onChange={this.handleChange} />
                 </Col>
               </Form.Group>
               <Form.Group as={Row}>

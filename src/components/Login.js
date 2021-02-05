@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 import axios from 'axios';
 import propTypes from 'prop-types';
 
@@ -65,7 +65,11 @@ class Login extends React.Component {
     } = this.state;
     return (
       <>
-        {error && <p>Your login credentials are incorrect.</p>}
+        {error && (
+          <Alert variant="danger" onClose={() => this.setState({ error: false })} dismissible>
+            <Alert.Heading>Invalid email or password!</Alert.Heading>
+          </Alert>
+        )}
         <h3>Log in.</h3>
         <Form onSubmit={this.handleLogin}>
           <Form.Group controlId="formBasicEmail">

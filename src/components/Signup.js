@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import propTypes from 'prop-types';
@@ -12,6 +12,7 @@ class Signup extends React.Component {
       password: '',
       name: '',
       username: '',
+      error: false,
     };
   }
 
@@ -55,15 +56,21 @@ class Signup extends React.Component {
       history.push('/');
     }).catch(error => {
       <p>{error}</p>;
+      this.setState({ error: true });
     });
   }
 
   render() {
     const {
-      email, password, name, username,
+      email, password, name, username, error,
     } = this.state;
     return (
       <>
+        {error && (
+        <Alert variant="danger" onClose={() => this.setState({ error: false })} dismissible>
+          <Alert.Heading>The sign up details are not correct!</Alert.Heading>
+        </Alert>
+        )}
         <h3>Sign up.</h3>
         <Form onSubmit={this.handleSignup}>
           <Form.Group>
