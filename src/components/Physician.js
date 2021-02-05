@@ -19,6 +19,7 @@ class Physician extends React.Component {
       physicianId: id,
       date: new Date(),
       city: '',
+      validated: false,
     };
   }
 
@@ -51,11 +52,12 @@ class Physician extends React.Component {
     }).then(() => {
       history.push('/appointments');
     });
+    this.setState({ validated: true });
   }
 
   render() {
     const {
-      date, city,
+      date, city, validated,
     } = this.state;
     return (
       <Container>
@@ -64,12 +66,15 @@ class Physician extends React.Component {
             <Image src={doctorImg} alt="doctor" fluid className="doctor" />
           </Col>
           <Col>
-            <Form className="d-flex flex-column justify-content-center form" onSubmit={this.handleSubmit}>
+            <Form noValidate validated={validated} className="d-flex flex-column justify-content-center form" onSubmit={this.handleSubmit}>
               <Form.Text className="h4 mb-3 ml-4">Book an Appointment.</Form.Text>
               <Form.Group as={Row}>
                 <Form.Label column className="h4 col-1 mr-2">City</Form.Label>
                 <Col className="col-9">
-                  <Form.Control type="text" placeholder="Enter City" value={city} name="city" onChange={this.handleChange} />
+                  <Form.Control required type="text" placeholder="Enter City" value={city} name="city" onChange={this.handleChange} />
+                  <Form.Control.Feedback type="invalid">
+                    Please enter a valid city.
+                  </Form.Control.Feedback>
                 </Col>
               </Form.Group>
               <Form.Group as={Row}>
@@ -82,7 +87,12 @@ class Physician extends React.Component {
                   />
                 </Col>
               </Form.Group>
-              <Button variant="primary" type="submit" className="ml-5 w-75">
+              <Button
+                disabled={city.length < 3 && true}
+                variant="primary"
+                type="submit"
+                className="ml-5 w-75"
+              >
                 Submit
               </Button>
             </Form>

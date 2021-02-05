@@ -10,6 +10,7 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
+      error: false,
     };
   }
 
@@ -49,17 +50,22 @@ class Login extends React.Component {
       this.setState({
         email: '',
         password: '',
+        error: true,
       });
       history.push('/');
     }).catch(error => {
       <p>{error}</p>;
+      this.setState({ error: true });
     });
   }
 
   render() {
-    const { email, password } = this.state;
+    const {
+      email, password, error,
+    } = this.state;
     return (
       <>
+        {error && <p>Your login credentials are incorrect.</p>}
         <h3>Log in.</h3>
         <Form onSubmit={this.handleLogin}>
           <Form.Group controlId="formBasicEmail">
@@ -69,7 +75,6 @@ class Login extends React.Component {
               We will never share your email with anyone else.
             </Form.Text>
           </Form.Group>
-
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password" name="password" value={password} onChange={this.handleChange} />
