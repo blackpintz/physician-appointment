@@ -1,4 +1,4 @@
-# Tv Information Guide
+# Book A Physician
 
 ## Project description
 An application for creating doctor appointments. It uses an API endpoint built using Rails
