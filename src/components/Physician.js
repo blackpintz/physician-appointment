@@ -119,4 +119,6 @@ Physician.defaultProps = {
   history: {},
 };
 
-export default connect(mapStateToProps)(Physician);
+const ConnectPhysician = connect(mapStateToProps)(Physician);
+
+export { ConnectPhysician as default, Physician };

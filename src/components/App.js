@@ -5,7 +5,7 @@ import '../App.css';
 import ConnectLogin from './Login';
 import AppointmentList from './AppointmentList';
 import Home from './Home';
-import Physician from './Physician';
+import ConnectPhysician from './Physician';
 import currentUser from '../helpers/currentUser';
 import ConnectSignup from './Signup';
 import Menu from './Menu';
@@ -22,7 +22,7 @@ const App = () => (
       <Route exact path="/appointments">
         {currentUser() ? <AppointmentList /> : <Redirect to="/login" />}
       </Route>
-      <Route exact path="/physician/:id" render={routeProps => (!currentUser() ? <Redirect to="/" /> : <Physician physicianId={routeProps.match.params.id} routeProps={routeProps} />)} />
+      <Route exact path="/physician/:id" render={routeProps => (!currentUser() ? <Redirect to="/" /> : <ConnectPhysician physicianId={routeProps.match.params.id} routeProps={routeProps} />)} />
     </Switch>
   </>
 );
