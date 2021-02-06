@@ -1,8 +1,8 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import AppointmentItem from '../components/AppointmentItem';
-import appointments from './fixtures/appointments';
+import AppointmentItem from '../../components/AppointmentItem';
+import appointments from '../fixtures/appointments';
 
 Enzyme.configure({ adapter: new Adapter() });
 

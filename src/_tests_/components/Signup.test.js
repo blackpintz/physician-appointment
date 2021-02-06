@@ -1,7 +1,7 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import { Login } from '../components/Login';
+import { Signup } from '../../components/Signup';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -16,10 +16,10 @@ beforeEach(() => {
     },
   };
   onFetch = jest.fn();
-  wrapper = shallow(<Login onFetch={onFetch} routeProps={rProps} />);
+  wrapper = shallow(<Signup onFetch={onFetch} routeProps={rProps} />);
 });
 
-test('should submit login form', () => {
+test('should submit Signup form', () => {
   wrapper.find('Form').simulate('submit', {
     preventDefault: () => { },
   });
@@ -44,7 +44,7 @@ test('should set password on input change', () => {
 });
 
 test('should call onSubmit for valid form submission', () => {
-  wrapper.instance().handleLogin = jest.fn();
+  wrapper.instance().handleSignup = jest.fn();
   wrapper.find('#password').simulate('change', {
     target: { value: 'password', name: 'password' },
   });
@@ -54,5 +54,5 @@ test('should call onSubmit for valid form submission', () => {
   wrapper.find('Form').simulate('submit', {
     preventDefault: () => { },
   });
-  expect(wrapper.instance().handleLogin).toBeCalled();
+  expect(wrapper.instance().handleSignup).toBeCalled();
 });
