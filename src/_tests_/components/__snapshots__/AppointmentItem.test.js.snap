@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render AppointmentItem component 1`] = `
+<Card
+  body={false}
+  className="w-50 mb-3"
+  key="1"
+>
+  <CardHeader
+    as="h5"
+  />
+  <CardBody>
+    <CardTitle
+      className="text-secondary"
+    >
+      Eye Specialist appointment on 2021-02-07, at Mwingi
+    </CardTitle>
+  </CardBody>
+</Card>
+`;
