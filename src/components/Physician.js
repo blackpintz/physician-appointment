@@ -87,7 +87,7 @@ class Physician extends React.Component {
               </Form.Group>
               <Button
                 disabled={city.length < 3 && true}
-                variant="primary"
+                variant="success"
                 type="submit"
                 className="ml-5 w-75"
               >

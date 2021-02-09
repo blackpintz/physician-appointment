@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Home component 1`] = `
+<Container
+  className="w-50"
+  fluid={false}
+>
+  <h3
+    className="mt-2"
+  >
+    Available Physicians
+  </h3>
+  <Carousel
+    controls={true}
+    defaultActiveIndex={0}
+    fade={false}
+    indicators={true}
+    interval={5000}
+    keyboard={true}
+    nextIcon={
+      <span
+        aria-hidden="true"
+        className="carousel-control-next-icon"
+      />
+    }
+    nextLabel="Next"
+    pause="hover"
+    prevIcon={
+      <span
+        aria-hidden="true"
+        className="carousel-control-prev-icon"
+      />
+    }
+    prevLabel="Previous"
+    slide={true}
+    touch={true}
+    wrap={true}
+  >
+    <CarouselItem
+      key="1"
+    >
+      <img
+        alt="slide"
+        className="d-block w-100"
+        src="stethescope.jpg"
+      />
+      <CarouselCaption>
+        <h3
+          className="text-dark font-weight-bolder"
+        >
+          Eye Specialist
+        </h3>
+        <Link
+          to="/physician/1"
+        >
+          <Button
+            active={false}
+            disabled={false}
+            variant="success"
+          >
+            Book an appointment
+          </Button>
+        </Link>
+      </CarouselCaption>
+    </CarouselItem>
+  </Carousel>
+</Container>
+`;
