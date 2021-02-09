@@ -55,7 +55,7 @@ class Login extends React.Component {
       this.setState({
         email: '',
         password: '',
-        error: true,
+        error: false,
       });
       history.push('/');
     }).catch(error => {

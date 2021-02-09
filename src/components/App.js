@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import ConnectLogin from './Login';
 import AppointmentList from './AppointmentList';
-import Home from './Home';
+import ConnectHome from './Home';
 import ConnectPhysician from './Physician';
 import currentUser from '../helpers/currentUser';
 import ConnectSignup from './Signup';
@@ -16,7 +16,7 @@ const App = () => (
     <Switch>
       <Route exact path="/login" render={routeProps => (currentUser() ? <Redirect to="/" /> : <ConnectLogin routeProps={routeProps} />)} />
       <Route exact path="/">
-        {currentUser() ? <Home /> : <Redirect to="/login" />}
+        {currentUser() ? <ConnectHome /> : <Redirect to="/login" />}
       </Route>
       <Route exact path="/signup" render={routeProps => (currentUser() ? <Redirect to="/" /> : <ConnectSignup routeProps={routeProps} />)} />
       <Route exact path="/appointments">
